@@ -1,4 +1,3 @@
-export {ClkSrc}
 function ClkSrc()
 {
   this.addInput("I_0","number");
