@@ -18,6 +18,9 @@ const initGraph = (canvasId) => {
   graph.start();
 
   // init responsive
+  const canvas = $(canvasId)[0];
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
   window.addEventListener("resize", () => onResize(canvasId));
 
   return graph;
