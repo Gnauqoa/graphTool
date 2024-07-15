@@ -1,4 +1,3 @@
-export { MyMux };
 class MyMux {
   // static obj_count = 0;
   constructor() {

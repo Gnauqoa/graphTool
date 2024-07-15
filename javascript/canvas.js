@@ -1,5 +1,3 @@
-import { MyMux } from "./component/MyMux.js";
-
 // register custom node in the system
 LiteGraph.registerNodeType("Logic/mux", MyMux);
 
@@ -34,5 +32,3 @@ const onResize = (canvasId) => {
 };
 // generate node
 const createNode = (name) => LiteGraph.createNode(name);
-
-export { initGraph, createNode };

@@ -1,5 +1,3 @@
-import { getNodes, formatNodeInOut } from "./graphUtils.js";
-
 // get all format all node inputs, outputs then save as json in download folder 
 const exportAllNodeAsJson = () => {
   const nodes = getNodes().map((node) => formatNodeInOut(node));
@@ -24,5 +22,3 @@ const downloadFile = (blob) => {
   document.body.removeChild(link);
   URL.revokeObjectURL(url);
 };
-
-export { downloadObj, downloadFile, exportAllNodeAsJson };
