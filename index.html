@@ -6,17 +6,24 @@
 	<title>Graph</title>
 
 	<link rel="stylesheet" type="text/css" href="./style/litegraph.css">
+	<link rel="stylesheet" type="text/css" href="./style/main.css">
+	<link rel="stylesheet" href="./style/bootstrap/bootstrap.min.css">
+
 	<script type="text/javascript" src="./javascript/lbr/litegraph.js"></script>
 	<script type="text/javascript" src="./javascript/lbr/jquery.js"></script>
+	<script defer src="./javascript/lbr/boostrap/bootstrap.bundle.min.js"></script>
 
 </head>
 
-<body style='width:100%; height:100%; margin: 0'>
+<body style='width:100%; height:100%; margin: 0; position: relative;'>
 	<canvas id='graphCanvas' width='1024' height='720' style='border: 1px solid'></canvas>
+
 	<script type="module">
 		import "./javascript/main.js"
 	</script>
-
+	<button type="button" id="exportBtn" class="btn btn-success">
+		Export
+	</button>
 </body>
 
 </html>
