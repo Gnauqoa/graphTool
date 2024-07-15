@@ -11,8 +11,10 @@ const initGraph = (canvasId) => {
   });
 
   graph.add(node_mux);
+
   graph.add(node_mux2);
 
+  node_mux.connect(0, node_mux2, 1); // (output_slot, target_node, input_slot)
   // start graph
   new LGraphCanvas(canvasId, graph);
   graph.start();

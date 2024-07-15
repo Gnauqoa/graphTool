@@ -5,6 +5,7 @@ class MyMux {
     this.addInput("I_1", "*");
     this.addOutput("Out", "*", "hello");
     this.addProperty("Size", "1", "number");
+
     var id = incr(1);
     this.nameWid = this.addWidget(
       "text",
@@ -20,17 +21,12 @@ class MyMux {
     let size = this.getInputOrProperty("Size");
     let current_length = this.inputs.length;
     let target_input = 2 ** parseInt(size);
-    console.log("target " + target_input);
-    console.log("length " + current_length);
     for (let i = 0; i < current_length + 1; i++) {
-      console.log("Remove " + i);
       this.removeInput(this.findInputSlot("I_" + i));
     }
     for (let i = 0; i < target_input; i++) this.addInput("I_" + i, "number");
   }
-  onConnectionsChange(...props) {
-    console.log(props);
-  }
+  onConnectionsChange(...props) {}
   onSelected() {
     console.log(this);
   }

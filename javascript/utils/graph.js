@@ -1,3 +1,8 @@
+const exportGraphAsJson = (fileName) => {
+  const nodes = getNodes().map((node) => formatNodeInOut(node));
+  downloadObj({ serialize: graph.serialize(), nodes }, fileName);
+};
+
 const objToArr = (obj) => Object.keys(obj).map((key) => obj[key]);
 
 const getLinks = () => objToArr(graph.links);

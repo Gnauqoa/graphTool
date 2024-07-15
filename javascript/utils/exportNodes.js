@@ -1,9 +1,3 @@
-// get all format all node inputs, outputs then save as json in download folder
-const exportAllNodeAsJson = (fileName) => {
-  const nodes = getNodes().map((node) => formatNodeInOut(node));
-  downloadObj(nodes, fileName);
-};
-
 // convert obj to json and save to download folder
 const downloadObj = (obj, fileName) => {
   const jsonString = JSON.stringify(obj, null, 2);
