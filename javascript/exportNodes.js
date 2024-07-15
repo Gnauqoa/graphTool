@@ -1,22 +1,22 @@
-// get all format all node inputs, outputs then save as json in download folder 
-const exportAllNodeAsJson = () => {
+// get all format all node inputs, outputs then save as json in download folder
+const exportAllNodeAsJson = (fileName) => {
   const nodes = getNodes().map((node) => formatNodeInOut(node));
-  downloadObj(nodes);
+  downloadObj(nodes, fileName);
 };
 
 // convert obj to json and save to download folder
-const downloadObj = (obj) => {
+const downloadObj = (obj, fileName) => {
   const jsonString = JSON.stringify(obj, null, 2);
   const blob = new Blob([jsonString], { type: "application/json" });
-  downloadFile(blob);
+  downloadFile(blob, fileName);
 };
 
 // save a blob to download folder
-const downloadFile = (blob) => {
+const downloadFile = (blob, fileName) => {
   const link = document.createElement("a");
   const url = URL.createObjectURL(blob);
   link.href = url;
-  link.download = Date.now(); // file name
+  link.download = fileName || Date.now(); // file name
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);
