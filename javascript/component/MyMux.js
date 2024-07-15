@@ -32,13 +32,9 @@ class MyMux {
     console.log(props);
   }
   onSelected() {
-    // console.log(this.serialize());
-    // console.log(this.inputs)
-    // console.log(this.outputs)
+    console.log(this);
   }
-  // onSelected(){
-  //   console.log(this.toString())
-  // }
+
   onGetInputs(arr) {
     console.log(arr);
   }
