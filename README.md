@@ -1,5 +1,6 @@
 ## Graph Tool Project
 A comprehensive tool for managing and visualizing nodes and links in logic circuit design, including functionalities for exporting nodes as JSON
+![image](https://github.com/user-attachments/assets/52d3aaf1-930a-46f9-9258-b79c256fa654)
 
 ## Description of Files and Directories
 
