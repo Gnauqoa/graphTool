@@ -3,6 +3,53 @@ const exportGraphAsJson = (fileName) => {
   downloadObj({ serialize: graph.serialize(), nodes }, fileName);
 };
 
+const importGraphFromJson = (event) => {
+  const file = event.target.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      const graphData = e.target.result;
+      if (graphData) {
+        const { serialize, nodes } = JSON.parse(graphData);
+        graph.stop();
+        graph.clear();
+        try {
+          graph.configure(serialize);
+          graph.start();
+          nodes.map((node) => {
+            const currentNode = getNodeById(node.id);
+console.log(currentNode)
+            currentNode.outputs.map((output, index) => {
+              console.log(output);
+              if (output.links)
+                output.links.map((link) => {
+                  console.log({
+                    currentNode,
+                    index,
+                    node: getNodeById(link.id),
+                    port: link.port.id,
+                  });
+                  currentNode.connect(
+                    index,
+                    getNodeById(link.id),
+                    link.port.id
+                  );
+                });
+            });
+          });
+          // new LGraphCanvas("graphCanvas", graph);
+        } catch (error) {
+          console.error("Error configuring graph:", error);
+          alert(
+            "There was an error importing the graph. Please check the console for more details."
+          );
+        }
+      }
+    };
+    reader.readAsText(file);
+  }
+};
+
 const objToArr = (obj) => Object.keys(obj).map((key) => obj[key]);
 
 const getLinks = () => objToArr(graph.links);
@@ -21,6 +68,7 @@ const getLinkById = (id) => getLinks().find((ele) => ele.id == id);
   node's connections
 */
 const formatNodeInOut = (node) => ({
+  id: node.id,
   title: node.title,
   properties: node.properties,
   properties_info: node.properties_info,
@@ -33,6 +81,7 @@ const formatNodeInOut = (node) => ({
     return {
       ...input,
       link: {
+        id: linkedNode.id,
         name: linkedNode.title,
         type: linkedNode.type,
         port: getPort(linkedNode, link.id),
@@ -48,6 +97,7 @@ const formatNodeInOut = (node) => ({
         const linkedNode = getLinkedNode(node.id, link);
 
         return {
+          id: linkedNode.id,
           name: linkedNode.title,
           type: linkedNode.type,
           port: getPort(linkedNode, link.id),
@@ -65,15 +115,25 @@ const formatNodeInOut = (node) => ({
   port is found, it returns null.
 */
 const getPort = (node, linkId) => {
-  const input = node.inputs.find((input) =>
+  // Find the input port and its index
+  const inputIndex = node.inputs.findIndex((input) =>
     input.link ? input.link == linkId : false
   );
-  if (input) return { ...input, type: "input" };
+  if (inputIndex !== -1) {
+    const input = node.inputs[inputIndex];
+    return { ...input, type: "input", id: inputIndex + 1 };
+  }
 
-  const output = node.outputs.find((output) =>
+  // Find the output port and its index
+  const outputIndex = node.outputs.findIndex((output) =>
     output.links ? output.links.includes(Number(linkId)) : false
   );
-  if (output) return { ...output, type: "output" };
+  if (outputIndex !== -1) {
+    const output = node.outputs[outputIndex];
+    return { ...output, type: "output", id: outputIndex + 1 };
+  }
+
+  // Return null if no port is found
   return null;
 };
 

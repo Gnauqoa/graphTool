@@ -3,3 +3,9 @@
   right: 12px;
   top: 12px;
 }
+
+#importBtn {
+  position: absolute;
+  right: 100px;
+  top: 12px;
+}

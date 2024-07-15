@@ -19,7 +19,8 @@
 	<button type="button" data-bs-toggle="modal" data-bs-target="#export-modal" id="exportBtn" class="btn btn-success">
 		Export
 	</button>
-
+	<button onclick="$('#import-file').click()" id="importBtn" class="btn btn-primary">Import</button>
+	<input type="file" id="import-file" style="display:none" accept=".json" onchange="importGraphFromJson(event)">
 	<div class="modal fade" tabindex="-1" id="export-modal">
 		<div class="modal-dialog modal-dialog-centered">
 			<div class="modal-content">
