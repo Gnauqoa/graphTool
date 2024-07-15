@@ -1,17 +1,13 @@
-import { graph } from "./main.js";
-
 const objToArr = (obj) => Object.keys(obj).map((key) => obj[key]);
 
-const getLinks = () => objToArr(graph.links); 
+const getLinks = () => objToArr(graph.links);
 // graph.links is a Object with data as { 1 :{}, 2: {} }, so we need convert it to array
 
 const getNodes = () => graph._nodes;
 
-const getNodeById = (id) =>
-  getNodes().find((ele) => ele.id == id);
+const getNodeById = (id) => getNodes().find((ele) => ele.id == id);
 
-const getLinkById = (id) =>
-  getLinks().find((ele) => ele.id == id);
+const getLinkById = (id) => getLinks().find((ele) => ele.id == id);
 
 /* 
   This function formats a node's input and output ports by replacing the link IDs
@@ -82,12 +78,3 @@ const getPort = (node, linkId) => {
 */
 const getLinkedNode = (currentId, link) =>
   getNodeById(link.target_id === currentId ? link.origin_id : link.target_id);
-
-export {
-  getLinks,
-  getNodes,
-  getLinkById,
-  getNodeById,
-  formatNodeInOut,
-  getPort,
-};
